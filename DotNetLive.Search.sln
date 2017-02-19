@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C64DECD1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetLive.Cnblogs.Rss", "DotNetLive.Cnblogs.Rss\DotNetLive.Cnblogs.Rss.csproj", "{1B855788-7457-48A8-AE77-B12029675984}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetLive.Search.Demo", "DotNetLive.Search.Demo\DotNetLive.Search.Demo.csproj", "{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,18 @@ Global
 		{1B855788-7457-48A8-AE77-B12029675984}.Release|x64.Build.0 = Release|x64
 		{1B855788-7457-48A8-AE77-B12029675984}.Release|x86.ActiveCfg = Release|x86
 		{1B855788-7457-48A8-AE77-B12029675984}.Release|x86.Build.0 = Release|x86
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Debug|x64.ActiveCfg = Debug|x64
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Debug|x64.Build.0 = Debug|x64
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Debug|x86.ActiveCfg = Debug|x86
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Debug|x86.Build.0 = Debug|x86
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Release|x64.ActiveCfg = Release|x64
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Release|x64.Build.0 = Release|x64
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Release|x86.ActiveCfg = Release|x86
+		{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
