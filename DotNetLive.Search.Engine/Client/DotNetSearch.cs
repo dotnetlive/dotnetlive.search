@@ -114,6 +114,21 @@ namespace DotNetLive.Search.Engine.Client
             }
             return t;
         }
+        #region
+        public IEnumerable<T> Query<T>(int pageIndex, int pageSize, string keyword, string index = null) where T : class
+        {
+            var from = (pageIndex - 1) * pageSize;
+            ISearchResponse<T> response = _builder?.Client.Search<T>(s => s
+                     .Type(typeof(T).SearchName())
+                     .Index(index ?? _defaultIndex)
+                     .From(from)
+                     .Size(pageSize)
+                     .Query(q => q.QueryString(qs => qs.Query(keyword).DefaultOperator(Operator.Or)))
+             //.Query(q => q
+             //.MatchPhrase(m => m.Field("content").Query(keyword)))
+             );
+            return response.Documents;
+        }
         #endregion
 
         #region 高级操作

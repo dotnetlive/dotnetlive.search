@@ -34,11 +34,7 @@ namespace DotNetLive.Search.Engine.Client
                             var config = _configuration.GetConfig();
                             if (config == null) throw new ArgumentException("error config");
 
-                            var nodes = new List<Uri>();
-                            foreach (var conf in config)
-                            {
-                                nodes.Add(new Uri(conf.ToString()));
-                            }
+                            var nodes = config.Select(x => new Uri(x.ToString()));
 
                             var pool = new StaticConnectionPool(nodes);
                             var settings = new ConnectionSettings(pool);
