@@ -9,10 +9,14 @@ namespace DotNetLive.Search.Engine.Client
 {
     internal static class TypeExtension
     {
+        /// <summary>
+        /// 转换成小写带下划线的type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static string SearchName(this Type type)
         {
-            var name = nameof(type);
-            return name.PascalToHyphen();
+            return type.Name.PascalToHyphen();
         }
 
         /// <summary>
