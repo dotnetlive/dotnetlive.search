@@ -29,9 +29,10 @@ def writeToTxt(list_name,file_path):
 #   return str(item).replace('\'','\"')+',\n'
 
 def saveBlogs():
-    for i in range(1,2):
+    #本以为能采集很多，可惜，只能采集3600多条
+    for i in range(1,200):
         print('request for '+str(i)+'...')
-        blogs = match.blogParser(i,10)
+        blogs = match.blogParser(i)
         #保存到文件
         path = createFile()
         writeToTxt(blogs,path+'/blog_'+ str(i) +'.json')

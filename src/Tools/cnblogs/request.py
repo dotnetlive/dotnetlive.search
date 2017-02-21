@@ -9,22 +9,33 @@ def getHtml(url,values):
     html = response_result.decode('utf-8')
     return html
 
-#获取数据
-def requestCnblogs(index):
+#首页
+def requestCnblogsHome(index):
+    return requestCnblogs(index,808,'SiteHome');
+#精华
+def requestCnblogsPicked(index):
+    return requestCnblogs(index,-2,'Picked')
+#候选
+def requestCnblogsPrepare(index):
+    return requestCnblogs(index,108697,'HomeCandidate')
+#发送总请求
+def requestCnblogs(index,category,categorytype):
     url = 'http://www.cnblogs.com/mvc/AggSite/PostList.aspx'
-    value= {
-         'CategoryId':808,
-         'CategoryType' : 'SiteHome',
-         'ItemListActionName' :'PostList',
-         'PageIndex' : index,
-         'ParentCategoryId' : 0,
-        'TotalPostCount' : 4000
+    value = {
+        'CategoryId': category,
+        'CategoryType': categorytype,
+        'ItemListActionName': 'PostList',
+        'PageIndex': index,
+        'ParentCategoryId': 0,
+        'TotalPostCount': 4000
     }
-    result = getHtml(url,value)
+    result = getHtml(url, value)
     return result
-
-def requestCnblogsByRange(start,end):
-    blogs =''
-    for i in range(start,end):
-        blogs+=requestCnblogs(i)
+def requestCnblogsByRange(index):
+    blogs = ''
+    blogs+=requestCnblogsHome(index)
+    if index<100:
+        blogs += requestCnblogsPicked(index)
+    blogs += requestCnblogsPrepare(index)
     return blogs
+

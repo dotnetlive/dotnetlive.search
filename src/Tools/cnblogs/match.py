@@ -3,13 +3,11 @@ import request
 import re
 import json
 #解析最外层
-def blogParser(index,page):
-  start = (index-1) * page + 1
-  end = index * page
-  cnblogs = request.requestCnblogsByRange(start,end)
+def blogParser(index):
+
+  cnblogs = request.requestCnblogsByRange(index)
   soup = BeautifulSoup(cnblogs, 'html.parser')
-  limit = 20 * page
-  all_div = soup.find_all('div', attrs={'class': 'post_item_body'}, limit=limit)
+  all_div = soup.find_all('div', attrs={'class': 'post_item_body'}, limit=80)
 
   blogs = []
   #循环div获取详细信息
