@@ -17,6 +17,7 @@ namespace cnblogs.import
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
+
             DotNetSearch search = new DotNetSearch().UseIndex("cnblogs");
 
             var provider = Start.RegisterServices();
@@ -30,7 +31,7 @@ namespace cnblogs.import
                 //反序列化得到实体
                 var entities = serializer.JsonToEntities<DotNetLive.Search.Entities.CnBlogs.Blog>(json);
                 int result = search.IndexMany(entities);
-
+                Console.WriteLine("文件：" + file + " 条数:" + result);
                 return false;
 
             });

@@ -35,6 +35,7 @@ namespace DotNetLive.Search.Entities.CnBlogs
         public string title { get; set; }
         public int view_num { get; set;}
         public int comment_num { get; set; }
+        public int goods_num { get; set; }
         public string summary { get; set; }
         public string href { get; set; }
         public DateTime create_time { get; set; }
