@@ -11,6 +11,6 @@ namespace cnblogs.import.Core
         /// 读取文件，获取文件内容
         /// </summary>
         /// <param name="fileHandler"></param>
-        void HandleFile(Action<string> fileHandler);
+        void HandleFile(Func<string,string,bool> fileHandler);
     }
 }

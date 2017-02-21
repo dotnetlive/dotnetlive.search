@@ -17,7 +17,7 @@ namespace cnblogs.import.Core
             this.FileProvider = fileProvider;
         }
 
-        public void HandleFile(Action<string> fileHandler)
+        public void HandleFile(Func<string,string,bool> fileHandler)
         {
             //通过FileProvider读取文件，遍历
             foreach (var fileInfo in this.FileProvider.GetDirectoryContents(""))
@@ -25,7 +25,12 @@ namespace cnblogs.import.Core
                 //读取文件内容（json）
                 string result = ReadAllTextAsync(fileInfo.Name).Result;
                 //执行处理
-                fileHandler(result);
+                var handleResult = fileHandler(fileInfo.Name, result);
+                if (handleResult){
+                    //导入成功之后，将该文件移动到其他文件夹
+                    //File(fileInfo.PhysicalPath);
+                    File.Delete(fileInfo.PhysicalPath);
+                }
             }
 
 
