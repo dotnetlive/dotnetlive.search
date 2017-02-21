@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import request
 import re
+import json
 #解析最外层
 def blogParser(index,page):
   start = (index-1) * page + 1
@@ -47,7 +48,7 @@ def analyzeBlog(item):
     view_str = find_all(footer,'span','article_view')[0].a.string
     result["view_num"] = re.search(r'\d+', view_str).group()
 
-    return result
+    return json.dumps(result)
 
 def find_all(item,attr,c):
     return item.find_all(attr,attrs={'class':c},limit=1)
