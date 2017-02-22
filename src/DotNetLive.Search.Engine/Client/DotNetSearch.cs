@@ -8,6 +8,7 @@ using DotNetLive.Search.Engine.Logger;
 using Elasticsearch.Net;
 using DotNetLive.Search.Engine.Config;
 using Microsoft.Extensions.Logging;
+using DotNetLive.Search.Engine.Model;
 
 namespace DotNetLive.Search.Engine.Client
 {
@@ -115,33 +116,129 @@ namespace DotNetLive.Search.Engine.Client
             }
             return t;
         }
+
         /// <summary>
-        /// 文档查询
+        /// 方法有点长，需要重构
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="keyword"></param>
+        /// <param name="pageParams"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public IEnumerable<T> Query<T>(int pageIndex, int pageSize, string keyword, string index = null) where T : class
+        public IQueryResult<T> Query<T>(IPageParam pageParams, string index = null) where T : class
         {
-            var from = (pageIndex - 1) * pageSize;
-            ISearchResponse<T> response = _builder?.Client.Search<T>(s => s
+            if (pageParams == null)
+            {
+                pageParams = new PageParam
+                {
+                    PageIndex = 1,
+                    PageSize = 20
+                };
+            }
+
+            SearchDescriptor<T> searchDescriptor = new SearchDescriptor<T>()
                      .Type(typeof(T).SearchName())
                      .Index(index ?? _defaultIndex)
-                     .From(from)
-                     .Size(pageSize)
-                     .Query(q => q.QueryString(qs => qs.Fields(new string[]{ "author"}).Query(keyword).DefaultOperator(Operator.Or)))
-             //.Query(q => q
-             //.MatchPhrase(m => m.Field("content").Query(keyword)))
-             //.Query(q=>q.Bool)
-             //.Query(q=>q.Match(t=>t.Field("author").Query(keyword)))
-             // .Query(q => q.QueryString(qs => qs.Query(keyword).DefaultOperator(Operator.Or)))
-             //.Query(q => q
-             //.MatchPhrase(m => m.Field("content").Query(keyword)))
-             );
-            return response.Documents;
+                     .From(pageParams.From)
+                     .Size(pageParams.PageSize);
+
+            if (pageParams is PageParam)
+            {
+                searchDescriptor = searchDescriptor.Query(q => 
+                    q.QueryString(qs => 
+                        qs.Query(pageParams.KeyWord)
+                          .DefaultOperator(pageParams.Operator)));
+            }
+            else if (pageParams is PageParamWithSearch)
+            {
+                PageParamWithSearch pageParamsSearch = pageParams as PageParamWithSearch;
+
+                searchDescriptor = searchDescriptor.Query(q =>
+                    q.QueryString(qs =>
+                        qs.Fields(pageParamsSearch.SearchKeys)
+                          .Query(pageParamsSearch.KeyWord)
+                          .DefaultOperator(pageParamsSearch.Operator)))
+                          .Highlight(h=> h.PreTags("<strong>")//改成strong以符合博客园的样式
+                             .PostTags("</strong>")//
+                             .Fields(
+                                 hf => hf.Field("")//标题高亮
+                                         .HighlightQuery(q => q
+                                                          .Match(m => m
+                                                          .Field("")
+                                                          .Query("")
+                                )
+                            ),
+                                hf => hf.Field("")//简介高亮
+                                        .HighlightQuery(q => q
+                                                         .Match(m => m
+                                                         .Field("")
+                                                         .Query("")
+                                 )
+                            )));
+            }
+            //是否需要高亮
+            bool hasHighlight = pageParams.Highlight?.Keys?.Length > 0;
+            if (hasHighlight) {
+                int keysLength = (pageParams.Highlight?.Keys?.Length).Value;
+                Func<HighlightFieldDescriptor<T>, IHighlightField>[] filedDesciptor = new Func<HighlightFieldDescriptor<T>, IHighlightField>[keysLength];
+                int keysIndex = 0;
+                foreach (string key in pageParams.Highlight?.Keys) {
+                    filedDesciptor[keysIndex] = hf => hf.Field(key)//简介高亮
+                                                        .HighlightQuery(q => q
+                                                        .Match(m => m
+                                                        .Field(key)
+                                                        .Query(pageParams.KeyWord)));
+                    keysIndex++;
+                }
+                //构造hightlight
+                IHighlight highLight = new HighlightDescriptor<T>()
+                    .PreTags(pageParams.Highlight.PreTags)
+                    .PostTags(pageParams.Highlight.PostTags)
+                    .Fields(filedDesciptor);
+                //设置高亮
+                searchDescriptor = searchDescriptor.Highlight(s => highLight);
+            }
+            //所有条件配置完成之后执行查询
+            ISearchResponse<T> response = _builder?.Client.Search<T>(s => searchDescriptor);
+
+            var list = response.Documents;
+            if (hasHighlight) {
+               var  listWithHightlight = new List<T>();
+                response.Hits.ToList().ForEach(x =>
+                {
+                    if (x.Highlights?.Count > 0)
+                    {
+                        //IDictionary<string, string> highLightResults = new Dictionary<string, string>();
+                        PropertyInfo[] properties = typeof(T).GetProperties();
+                        foreach (string key in pageParams.Highlight?.Keys) {
+                            //先得到要替换的内容
+                            string value = string.Join("", x.Highlights[key].Highlights);
+                            PropertyInfo info = properties.FirstOrDefault(p => p.Name == key);
+                            if (info?.CanWrite == true)
+                            {
+                                if (!string.IsNullOrEmpty(value))
+                                {
+                                    //如果高亮字段不为空，才赋值，否则就赋值成空
+                                    info.SetValue(x.Source, value);
+                                }
+                            }
+                        }
+                        //if (pageParams.Highlight?.HandleHighlightResult != null)
+                        //{
+                        //    //反射修改对象内容
+                        //    //pageParams.Highlight.HandleHighlightResult(highLightResults, x.Source);
+                        //}
+                    }
+                    listWithHightlight.Add(x.Source);
+                });
+            }
+
+            IQueryResult<T> result = new CustomQueryResult<T>
+            {
+                List = list,
+                Took = response.Took,
+                Total = response.Total
+            };
+            return result;
         }
         #endregion
 

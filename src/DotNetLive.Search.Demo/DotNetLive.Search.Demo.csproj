@@ -41,6 +41,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DotNetLive.Search.Entities\DotNetLive.Search.Entities.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Update="Views\Home\Index.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

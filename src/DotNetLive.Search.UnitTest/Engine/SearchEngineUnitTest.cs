@@ -52,6 +52,14 @@ namespace DotNetLive.Search.UnitTest
             Assert.AreEqual(true, result);
         }
 
+        [TestMethod]
+        public void DeleteIndex()
+        {
+            Engine.Client.DotNetSearch search = new Engine.Client.DotNetSearch().UseIndex("test");
+            bool result = search.DeleteIndex("test");
+            Assert.IsTrue(result);
+        }
+
 
     }
 }
