@@ -156,24 +156,7 @@ namespace DotNetLive.Search.Engine.Client
                     q.QueryString(qs =>
                         qs.Fields(pageParamsSearch.SearchKeys)
                           .Query(pageParamsSearch.KeyWord)
-                          .DefaultOperator(pageParamsSearch.Operator)))
-                          .Highlight(h=> h.PreTags("<strong>")//改成strong以符合博客园的样式
-                             .PostTags("</strong>")//
-                             .Fields(
-                                 hf => hf.Field("")//标题高亮
-                                         .HighlightQuery(q => q
-                                                          .Match(m => m
-                                                          .Field("")
-                                                          .Query("")
-                                )
-                            ),
-                                hf => hf.Field("")//简介高亮
-                                        .HighlightQuery(q => q
-                                                         .Match(m => m
-                                                         .Field("")
-                                                         .Query("")
-                                 )
-                            )));
+                          .DefaultOperator(pageParamsSearch.Operator)));
             }
             //是否需要高亮
             bool hasHighlight = pageParams.Highlight?.Keys?.Length > 0;
