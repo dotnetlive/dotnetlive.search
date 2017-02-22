@@ -25,7 +25,7 @@ namespace DotNetLive.Search.Engine.Config
             //    .GetService<IOptions<ElasticSetting>>();
             //return optionsAccessor.Value?.Nodes;
             return new List<ConfigNode> {
-                 new ConfigNode { Port=9200, Uri="http://120.27.99.151" }
+                 new ConfigNode { Port=9200, Uri="http://*.*.*.*" }
             };
         }
     }
