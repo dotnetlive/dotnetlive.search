@@ -29,6 +29,7 @@ namespace DotNetLive.Search.Entities.Page
     /// <typeparam name="T"></typeparam>
     public class Pager<T> where T:class
     {
+        
         public PageParam PageData { get; set; }
        
         public IEnumerable<T> List { get; set; }
