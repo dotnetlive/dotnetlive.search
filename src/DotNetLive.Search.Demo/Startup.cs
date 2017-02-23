@@ -29,6 +29,8 @@ namespace DotNetLive.Search.Demo
         {
             // Add framework services.
             services.AddMvc();
+
+            //Add search Service
             services.AddTransient<Services.Interface.CnBlogs.ICnBlogsService, Services.Classes.CnBlogs.BlogService>();
         }
 
