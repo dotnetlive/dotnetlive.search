@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DotNetLive.Search.Entities\DotNetLive.Search.Entities.csproj" />
+    <ProjectReference Include="..\DotNetLive.Search.Services\DotNetLive.Search.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Views\Home\Index.cshtml">
