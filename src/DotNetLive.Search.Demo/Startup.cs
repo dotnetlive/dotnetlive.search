@@ -29,6 +29,7 @@ namespace DotNetLive.Search.Demo
         {
             // Add framework services.
             services.AddMvc();
+            services.AddTransient<Services.Interface.CnBlogs.ICnBlogsService, Services.Classes.CnBlogs.BlogService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
