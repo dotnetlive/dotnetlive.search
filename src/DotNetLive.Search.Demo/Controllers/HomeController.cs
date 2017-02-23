@@ -3,14 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using DotNetLive.Search.Services.Interface.CnBlogs;
 
 namespace DotNetLive.Search.Demo.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        /// <summary>
+        /// blogService接口
+        /// </summary>
+        private ICnBlogsService cnblogService;
+
+        public HomeController(ICnBlogsService service)
         {
-            return View();
+            cnblogService = service;
+        }
+
+        /// <summary>
+        /// 搜索首页
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        public IActionResult Index(int pageIndex = 1, string keyword = null)
+        {
+            var model = cnblogService.QueryByPage(pageIndex, keyWord: keyword);
+            return View(model);
         }
 
         public IActionResult About()
