@@ -13,7 +13,7 @@
             //Add search Service
             services.AddTransient<Services.Interface.CnBlogs.ICnBlogsService, Services.Classes.CnBlogs.BlogService>();
         }
-
+```
 #### 效果图：
 ![](http://images2015.cnblogs.com/blog/841545/201702/841545-20170223235351648-1569692084.png) 
 
