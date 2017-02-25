@@ -7,28 +7,6 @@
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="wwwroot\css\common.css" />
-    <Content Include="wwwroot\css\font.css" />
-    <Content Include="wwwroot\css\search.css" />
-    <Content Include="wwwroot\css\search_v.css" />
-    <Content Include="wwwroot\css\site.css" />
-    <Content Include="wwwroot\css\site.min.css" />
-    <Content Include="wwwroot\images\banner1.svg" />
-    <Content Include="wwwroot\images\banner2.svg" />
-    <Content Include="wwwroot\images\banner3.svg" />
-    <Content Include="wwwroot\images\banner4.svg" />
-    <Content Include="wwwroot\images\good.gif" />
-    <Content Include="wwwroot\images\icon_arrow.gif" />
-    <Content Include="wwwroot\images\icon_comment.gif" />
-    <Content Include="wwwroot\images\logo.gif" />
-    <Content Include="wwwroot\images\logo.png" />
-    <Content Include="wwwroot\images\logo_small.gif" />
-    <Content Include="wwwroot\images\time.png" />
-    <Content Include="wwwroot\js\site.js" />
-    <Content Include="wwwroot\js\site.min.js" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.0.3" />
