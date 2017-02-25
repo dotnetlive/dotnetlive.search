@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "DotNetLive.Search.Demo": {
+    "DotNetLive.SerachWeb": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

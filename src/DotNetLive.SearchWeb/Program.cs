@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 
-namespace DotNetLive.Search.Demo
+namespace DotNetLive.SerachWeb
 {
     public class Program
     {

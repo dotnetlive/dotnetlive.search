@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DotNetLive.Search.Services.Interface.CnBlogs;
 
-namespace DotNetLive.Search.Demo.Controllers
+namespace DotNetLive.SerachWeb.Controllers
 {
     public class HomeController : Controller
     {

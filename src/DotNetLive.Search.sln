@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetLive.Search.UnitTest"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C64DECD1-84BD-4399-BFB0-EDB92AA8E15B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetLive.Search.Demo", "DotNetLive.Search.Demo\DotNetLive.Search.Demo.csproj", "{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetLive.SerachWeb", "DotNetLive.SerachWeb\DotNetLive.SerachWeb.csproj", "{67573D80-EA4A-43F8-ACF4-7B023D6B3DD0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cnblogs.import", "Tools\cnblogs.import\cnblogs.import.csproj", "{E8D5F685-89D2-43C4-B340-D4065614516C}"
 EndProject
