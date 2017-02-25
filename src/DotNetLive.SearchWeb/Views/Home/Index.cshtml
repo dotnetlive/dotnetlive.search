@@ -1,102 +1,104 @@
-﻿@{ Layout = null; } @using DotNetLive.Search.Entities.Page; @using DotNetLive.Search.Entities.CnBlogs; @model ElasticPager
-<Blog>
+﻿@using DotNetLive.Search.Entities.Page; 
+@using DotNetLive.Search.Entities.CnBlogs; 
+@model ElasticPager<Blog>
+@{ Layout = null; } 
+<!DOCTYPE html>
 
-    <!DOCTYPE html>
-    <html>
+<html>
 
-    <head>
-        <meta charset="utf-8" />
-        <title>DNL Search</title>
-        <!--<link href="~/css/font.css" rel="stylesheet" />
-    <link href="~/css/common.css" rel="stylesheet" />
-    <link href="~/css/search.css" rel="stylesheet" />
-    <link href="~/css/search_v.css" rel="stylesheet" />-->
-        <environment names="Development">
-            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-            <link rel="stylesheet" href="~/default/css/site.css" />
-        </environment>
-        <environment names="Staging,Production">
-            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-                asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-            <link rel="stylesheet" href="~/default/css/site.min.css" asp-append-version="true" />
-        </environment>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <title>DNL Search</title>
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/default/css/site.css" />
+        <link href="~/default/css/font.css" rel="stylesheet" />
+        <link href="~/default/css/common.css" rel="stylesheet" />
+        <link href="~/default/css/search.css" rel="stylesheet" />
+        <link href="~/default/css/search_v.css" rel="stylesheet" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+            asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/default/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
 
-    <body>
-        <div class="top">
-            <div id="span_userinfo"></div>
-        </div>
-        <div id="header">
-            <a id="logo" href="/"><img style="width: 100%;height:90%" alt="dotnetlive 搜一搜logo" src="/images/logo.png" /></a>
+<body>
+    <div class="top">
+        <div id="span_userinfo"></div>
+    </div>
+    <div id="header">
+        <a id="logo" href="/"><img style="height:90%" alt="dotnetlive 搜一搜logo" src="/images/logo.png" /></a>
 
-            <div class="index_sozone">
+        <div class="index_sozone">
 
-                <div class="index_tab">
-                    <a class="tab_selected " href="/s/blogpost?Keywords=.net">博客</a>
-                    <a class="" href="/s/question?Keywords=.net">论坛</a>
-                </div>
-
-                <div>
-                    <form action="/" autocomplete="off" method="get">
-                        <div class="index_btn">
-                            <input type="submit" class="btn_so_index" value="&nbsp;搜一下&nbsp;" />
-                        </div>
-                        <input class="input_index" id="w" name="keyword" type="text" value="@Model.KeyWord" />
-                    </form>
-                </div>
-
+            <div class="index_tab">
+                <a class="tab_selected " href="/s/blogpost?Keywords=.net">博客</a>
+                <a class="" href="/s/question?Keywords=.net">论坛</a>
             </div>
-            <div style="clear: both"></div>
-            <div id="searchInfo">
-                <span style="float: left; margin-left: 15px;"></span>DNL。Search，找到相关内容<b id="CountOfResults">@Model.PageData.TotalCount</b>篇，用时@(Model.Took)毫秒
+
+            <div>
+                <form action="/" autocomplete="off" method="get">
+                    <div class="index_btn">
+                        <input type="submit" class="btn_so_index" value="&nbsp;搜一下&nbsp;" />
+                    </div>
+                    <input class="input_index" id="w" name="keyword" type="text" value="@Model.KeyWord" />
+                </form>
             </div>
-            <!--end: searchInfo -->
+
         </div>
-        <!--end: header -->
-        <div id="main">
-            <div id="searchResult">
-                <div style="clear: both">
-                </div>
-                <div class="forflow">
-                    @foreach (var item in Model?.List) {
-                    <div class="searchItem">
-                        <h3 class="searchItemTitle">
-                            <a target="_blank" href="@item.href">@Html.Raw(item.title)</a>
-                        </h3>
-                        <!--end: searchItemTitle -->
-                        <span class="searchCon">
+        <div style="clear: both"></div>
+        <div id="searchInfo">
+            <span style="float: left; margin-left: 15px;"></span>DNL。Search，找到相关内容<b id="CountOfResults">@Model.PageData.TotalCount</b>篇，用时@(Model.Took)毫秒
+        </div>
+        <!--end: searchInfo -->
+    </div>
+    <!--end: header -->
+    <div id="main">
+        <div id="searchResult">
+            <div style="clear: both">
+            </div>
+            <div class="forflow">
+                @foreach (var item in Model?.List) {
+                <div class="searchItem">
+                    <h3 class="searchItemTitle">
+                        <a target="_blank" href="@item.href">@Html.Raw(item.title)</a>
+                    </h3>
+                    <!--end: searchItemTitle -->
+                    <span class="searchCon">
                             @Html.Raw(item.summary)
                         </span>
-                        <!--end: searchCon -->
-                        <div class="searchItemInfo">
-                            <span class="searchItemInfo-userName">
+                    <!--end: searchCon -->
+                    <div class="searchItemInfo">
+                        <span class="searchItemInfo-userName">
                                 <a href="@item.author_url" target="_blank">@item.author</a>
                             </span>
-                            <span class="searchItemInfo-publishDate">@item.create_time</span>
-                            <span class="searchItemInfo-good">推荐(@item.goods_num)</span>
-                            <span class="searchItemInfo-comments">评论(@item.comment_num)</span>
-                            <span class="searchItemInfo-views">浏览(@item.view_num)</span>
+                        <span class="searchItemInfo-publishDate">@item.create_time</span>
+                        <span class="searchItemInfo-good">推荐(@item.goods_num)</span>
+                        <span class="searchItemInfo-comments">评论(@item.comment_num)</span>
+                        <span class="searchItemInfo-views">浏览(@item.view_num)</span>
 
-                        </div>
-                        <div class="searchItemInfo">
-                            <span class="searchURL">@item.href</span>
-                        </div>
                     </div>
-                    }
-
-                    <div id="paging_block">@Html.Raw("")</div>
-
-
+                    <div class="searchItemInfo">
+                        <span class="searchURL">@item.href</span>
+                    </div>
                 </div>
+                }
+
+                <div id="paging_block">@Html.Raw("")</div>
+
+
             </div>
-
-        </div>
-        <div style="clear: both;"></div>
-
-        <div id="footer">
-            &copy; 2017-@DateTime.Now.Year <a title="DotNetLive Search" href="search.dotnet.live">DotNetLive Search</a>
         </div>
 
-    </body>
+    </div>
+    <div style="clear: both;"></div>
 
-    </html>
+    <div id="footer">
+        &copy; 2017-@DateTime.Now.Year <a title="DotNetLive Search" href="search.dotnet.live">DotNetLive Search</a>
+    </div>
+
+</body>
+
+</html>
