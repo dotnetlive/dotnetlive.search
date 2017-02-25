@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DotNetLive.Search.Services.Classes.CnBlogs;
+using DotNetLive.Search.Services.Interface.CnBlogs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,7 +29,7 @@ namespace DotNetLive.SerachWeb
             services.AddMvc();
 
             //Add search Service
-            services.AddTransient<Services.Interface.CnBlogs.ICnBlogsService, Services.Classes.CnBlogs.BlogService>();
+            services.AddTransient<ICnBlogsService, BlogService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
