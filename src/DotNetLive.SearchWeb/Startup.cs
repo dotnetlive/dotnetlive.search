@@ -1,10 +1,13 @@
-﻿using DotNetLive.Search.Services.Classes.CnBlogs;
+﻿using DotNetLive.Search.Config;
+using DotNetLive.Search.Services.Classes.CnBlogs;
+using DotNetLive.Search.Services.Factory;
 using DotNetLive.Search.Services.Interface.CnBlogs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace DotNetLive.SerachWeb
 {
@@ -25,11 +28,17 @@ namespace DotNetLive.SerachWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Add Options
+           
             // Add framework services.
             services.AddMvc();
-
+            //Add config options
+            services.Configure<ElasticSetting>(Configuration.GetSection("ElasticSetting"))
+            //Add search factory
+            .AddSingleton<ISearchFactory, SearchFactory>()
             //Add search Service
-            services.AddTransient<ICnBlogsService, BlogService>();
+            .AddTransient<ICnBlogsService, BlogService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
