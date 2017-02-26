@@ -6,18 +6,23 @@ using DotNetLive.Search.Entities.Page;
 using DotNetLive.Search.Services.Interface.CnBlogs;
 using Microsoft.Extensions.Logging;
 using DotNetLive.Search.Engine.Model;
+using DotNetLive.Search.Services.Factory;
 
 namespace DotNetLive.Search.Services.Classes.CnBlogs
 {
     public class BlogService : ICnBlogsService
     {
+        private readonly string searchIndex = "cnblogs";
+
         private readonly Engine.Client.DotNetSearch search;
 
-        public BlogService(ILoggerFactory loggerFactory) {
+        public BlogService(ILoggerFactory loggerFactory, ISearchFactory factory)
+        {
 
             var logger = loggerFactory.CreateLogger<BlogService>();
+            //创建查询客户端
 
-            search = new Engine.Client.DotNetSearch(logger).UseIndex("cnblogs");//.UserLogger(logger);
+            search = factory.CreateSearchClient(searchIndex, logger);
         }
 
         public ElasticPager<Blog> QueryByPage(int pageIndex = 1, int pageSize = 20, string keyWord = null)
