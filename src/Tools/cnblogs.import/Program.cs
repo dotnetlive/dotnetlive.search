@@ -13,10 +13,7 @@ namespace cnblogs.import
         static void Main(string[] args)
         {
 
-
-
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
 
             DotNetSearch search = new DotNetSearch().UseIndex("cnblogs");
 

@@ -22,12 +22,12 @@ namespace DotNetLive.Search.Entities.CnBlogs
             get
             {
 
-                if (!string.IsNullOrEmpty(href))
-                {
-                    var lastArr = href.Split('/');
-                    var result = lastArr[lastArr.Length - 1].Split('.')[0];
-                    return result;
-                }
+                //if (!string.IsNullOrEmpty(href))
+                //{
+                //    var lastArr = href.Split('/');
+                //    var result = lastArr[lastArr.Length - 1].Split('.')[0];
+                //    return result;
+                //}
                 return Guid.NewGuid().ToString();
             }
         }
