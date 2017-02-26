@@ -9,6 +9,7 @@ using Elasticsearch.Net;
 using DotNetLive.Search.Engine.Config;
 using Microsoft.Extensions.Logging;
 using DotNetLive.Search.Engine.Model;
+using DotNetLive.Search.Config;
 
 namespace DotNetLive.Search.Engine.Client
 {
@@ -19,9 +20,15 @@ namespace DotNetLive.Search.Engine.Client
         private ILogger _logger;
 
         #region 构造函数
+
         public DotNetSearch()
         {
             _builder = new SearchEngineBuilder();
+        }
+
+        public DotNetSearch(ElasticSetting settting)
+        {
+            _builder = new SearchEngineBuilder(settting);
         }
 
         public DotNetSearch(ILogger logger) : this()
