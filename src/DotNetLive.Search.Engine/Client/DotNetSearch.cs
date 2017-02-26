@@ -257,6 +257,7 @@ namespace DotNetLive.Search.Engine.Client
         /// <returns>返回更新的条数</returns>
         public int IndexMany<T>(IEnumerable<T> documents, string index = null) where T : class
         {
+            if (documents == null || documents.Count() == 0) { return 0; }
             IBulkResponse response = _builder?.Client.IndexMany<T>(documents, index ?? _defaultIndex, typeof(T).SearchName());
             if (response.Errors)
             {
