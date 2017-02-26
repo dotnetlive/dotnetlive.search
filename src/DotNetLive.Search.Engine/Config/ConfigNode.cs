@@ -15,13 +15,15 @@ namespace DotNetLive.Search.Config
 
         public override string ToString()
         {
-            var result = $"{Uri}:{Port}".ToLowerInvariant();
+            var port = Port == 0 ? "" : $":{Port}";
+            var result = $"{Uri}:{port}".ToLowerInvariant();
 
             if (result.IndexOf("http") > -1)
             {
                 return result;
             }
-            else {
+            else
+            {
                 return $"http://{result}";
             }
         }
