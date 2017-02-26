@@ -1,4 +1,5 @@
-﻿using DotNetLive.Search.Engine.Config;
+﻿using DotNetLive.Search.Config;
+using DotNetLive.Search.Engine.Config;
 using Elasticsearch.Net;
 using Nest;
 using System;
@@ -15,8 +16,13 @@ namespace DotNetLive.Search.Engine.Client
     {
         private ElasticClient _client;
         private ISearchEngineConfiguration _configuration;
+        private ElasticSetting _setting;
         private static object _lock = new object();
 
+        public SearchEngineBuilder(ElasticSetting setting)
+        {
+            _setting = setting;
+        }
         public SearchEngineBuilder()
         {
             _configuration = new SearchEngineDefaultConfiguration();
@@ -31,7 +37,14 @@ namespace DotNetLive.Search.Engine.Client
                     {
                         if (_client == null)
                         {
-                            var config = _configuration.GetConfig();
+                            IEnumerable<ConfigNode> config;
+                            if (_setting?.Nodes == null)
+                            {
+                                config = _configuration.GetConfig();
+                            }
+                            else {
+                                config = _setting.Nodes;
+                            }
                             if (config == null) throw new ArgumentException("error config");
 
                             var nodes = config.Select(x => new Uri(x.ToString()));
