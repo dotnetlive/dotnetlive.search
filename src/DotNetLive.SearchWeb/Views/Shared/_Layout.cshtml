@@ -1,17 +1,19 @@
-﻿<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-cn" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-cn" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en">
- <!--<![endif]-->
+<html lang="zh-cn">
+<!--<![endif]-->
+
 <head>
-    <title>DNL Search</title>
+    <title>ASP.NET Core最佳落地实践</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="ASP.NET Core最佳落地实践">
+    <meta name="author" content="https://github.com/dotnetlive">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -20,184 +22,293 @@
     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
     <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-
+    <environment names="Development">
+        <link rel="stylesheet" href="//static.dotnet.live/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
+        <link rel="stylesheet" href="//static.dotnet.live/assets/css/style.css" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" asp-fallback-href="//static.dotnet.live/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+        <link rel="stylesheet" href="//static.dotnet.live/assets/css/style.css" asp-append-version="true" />
+    </environment>
+    <!--<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
+    <link rel="stylesheet" href="assets/css/style.css" asp-append-version="true" />-->
     <!-- CSS Header and Footer -->
-    <link rel="stylesheet" href="assets/css/headers/header-default.css">
-    <link rel="stylesheet" href="assets/css/footers/footer-v1.css">
+    <link rel="stylesheet" href="//static.dotnet.live/assets/css/headers/header-v8.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//static.dotnet.live/assets/css/footers/footer-v8.css" asp-append-version="true" />
 
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="assets/plugins/animate.css">
-    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
-    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.css">
-
-    <!-- CSS Page Style -->
-    <link rel="stylesheet" href="assets/css/pages/page_search_inner.css">
-
+    <link rel="stylesheet" href="//static.dotnet.live/assets/plugins/animate.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//static.dotnet.live/assets/plugins/line-icons/line-icons.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//static.dotnet.live/lib/font-awesome/css/font-awesome.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//static.dotnet.live/assets/plugins/login-signup-modal-window/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//static.dotnet.live/assets/plugins/parallax-slider/css/parallax-slider.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//static.dotnet.live/assets/plugins/fancybox/source/jquery.fancybox.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//static.dotnet.live/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css" asp-append-version="true" />
+    <!-- CSS Page Level -->
+    @RenderSection("Styles", required: false)
     <!-- CSS Theme -->
-    <link rel="stylesheet" href="assets/css/theme-colors/default.css" id="style_color">
-    <link rel="stylesheet" href="assets/css/theme-skins/dark.css">
+    <link rel="stylesheet" href="//static.dotnet.live/assets/css/theme-colors/default.css" id="style_color">
+    <link rel="stylesheet" href="//static.dotnet.live/assets/css/theme-skins/dark.css" asp-append-version="true" />
 
     <!-- CSS Customization -->
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="//static.dotnet.live/assets/css/custom.css" asp-append-version="true" /> @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 
-<body>
+<body class="header-fixed header-fixed-space-v2">
     <div class="wrapper">
-        <!--=== Header ===-->
-        <div class="header">
-            <div class="container">
-                <!-- Logo -->
-                <a class="logo" href="index.html">
-                    <img src="images/logo.png" alt="Logo">
-                </a>
-                <!-- End Logo -->
-                <!-- Toggle get grouped for better mobile display -->
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="fa fa-bars"></span>
-                </button>
-                <!-- End Toggle -->
-            </div><!--/end container-->
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
-                <div class="container">
-                    <ul class="nav navbar-nav">
-                        <!-- Home -->
-                        <li>
-                            <a href="http://dotnet.live">
-                                首页
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                博客
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                论坛
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/dotnetlive/dotnetlive.search">
-                                源码
-                            </a>
-                        </li>
-                        <!-- End Home -->
-                    </ul>
-                </div><!--/end container-->
-            </div><!--/navbar-collapse-->
-        </div>
-        <!--=== End Header ===-->
+        <!--=== Header v8 ===-->
+        @await Html.PartialAsync("_Header")
+        <!--=== End Header v8 ===-->
+        <!-- Interactive Slider v2 -->
+        @RenderSection("Slider", required: false)
+        <!-- End Interactive Slider v2 -->
+        <!--=== Content Part ===-->
         @RenderBody()
-        <!--=== Footer Version 1 ===-->
-        <div class="footer-v1">
-            @*<div class="footer">
-                <div class="container">
-                    <div class="row">
-                        <!-- About -->
-                        <div class="col-md-3 md-margin-bottom-40">
-                            <a href="index.html"><img id="logo-footer" class="footer-logo" src="assets/img/logo2-default.png" alt=""></a>
-                            <p>About Unify dolor sit amet, consectetur adipiscing elit. Maecenas eget nisl id libero tincidunt sodales.</p>
-                            <p>Duis eleifend fermentum ante ut aliquam. Cras mi risus, dignissim sed adipiscing ut, placerat non arcu.</p>
-                        </div><!--/col-md-3-->
-                        <!-- End About -->
-                        <!-- Latest -->
-                        <div class="col-md-3 md-margin-bottom-40">
-                            <div class="posts">
-                                <div class="headline"><h2>Latest Posts</h2></div>
-                                <ul class="list-unstyled latest-list">
-                                    <li>
-                                        <a href="#">Incredible content</a>
-                                        <small>May 8, 2014</small>
-                                    </li>
-                                    <li>
-                                        <a href="#">Best shoots</a>
-                                        <small>June 23, 2014</small>
-                                    </li>
-                                    <li>
-                                        <a href="#">New Terms and Conditions</a>
-                                        <small>September 15, 2014</small>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div><!--/col-md-3-->
-                        <!-- End Latest -->
-                        <!-- Link List -->
-                        <div class="col-md-3 md-margin-bottom-40">
-                            <div class="headline"><h2>Useful Links</h2></div>
-                            <ul class="list-unstyled link-list">
-                                <li><a href="#">About us</a><i class="fa fa-angle-right"></i></li>
-                                <li><a href="#">Portfolio</a><i class="fa fa-angle-right"></i></li>
-                                <li><a href="#">Latest jobs</a><i class="fa fa-angle-right"></i></li>
-                                <li><a href="#">Community</a><i class="fa fa-angle-right"></i></li>
-                                <li><a href="#">Contact us</a><i class="fa fa-angle-right"></i></li>
-                            </ul>
-                        </div><!--/col-md-3-->
-                        <!-- End Link List -->
-                        <!-- Address -->
-                        <div class="col-md-3 map-img md-margin-bottom-40">
-                            <div class="headline"><h2>Contact Us</h2></div>
-                            <address class="md-margin-bottom-40">
-                                25, Lorem Lis Street, Orange <br />
-                                California, US <br />
-                                Phone: 800 123 3456 <br />
-                                Fax: 800 123 3456 <br />
-                                Email: <a href="mailto:info@anybiz.com" class="">info@anybiz.com</a>
-                            </address>
-                        </div><!--/col-md-3-->
-                        <!-- End Address -->
-                    </div>
-                </div>
-            </div><!--/footer-->*@
+        <!-- End Content Part -->
+        <!--=== Footer v8 ===-->
+        @await Html.PartialAsync("_Footer")
+        <!--=== End Footer v8 ===-->
+        <!-- Login/Reg Modal Box -->
+        @*
+            <div class="cd-user-modal">
+                <!-- this is the entire modal form, including the background -->
+                <div class="cd-user-modal-container">
+                    <!-- this is the container wrapper -->
+                    <ul class="cd-switcher">
+                        <li><a href="javascript:void(0);">Login</a></li>
+                        <li><a href="javascript:void(0);">Register</a></li>
+                    </ul>
 
-            <div class="copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>
-                                2017 &copy; All Rights Reserved.
-                                <a href="http://dotnet.live" target="_blank">.Net Core 落地实践</a> | <a href="#">DNL Search</a>
+                    <div id="cd-login">
+                        <!-- log in form -->
+                        <form class="cd-form">
+                            <p class="social-login">
+                                <span class="social-login-facebook"><a href="#"><i class="fa fa-facebook"></i> Facebook</a></span>
+                                <span class="social-login-google"><a href="#"><i class="fa fa-google"></i> Google</a></span>
+                                <span class="social-login-twitter"><a href="#"><i class="fa fa-twitter"></i> Twitter</a></span>
                             </p>
-                        </div>
 
-                        <!-- End Social Links -->
+                            <div class="lined-text">
+                                <span>Or use your account on Unify</span>
+                                <hr>
+                            </div>
+
+                            <p class="fieldset">
+                                <label class="image-replace cd-email" for="signin-email">E-mail</label>
+                                <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
+                                <span class="cd-error-message">Error message here!</span>
+                            </p>
+
+                            <p class="fieldset">
+                                <label class="image-replace cd-password" for="signin-password">Password</label>
+                                <input class="full-width has-padding has-border" id="signin-password" type="text" placeholder="Password">
+                                <a href="javascript:void(0);" class="hide-password">Hide</a>
+                                <span class="cd-error-message">Error message here!</span>
+                            </p>
+
+                            <p class="fieldset">
+                                <input type="checkbox" id="remember-me" checked>
+                                <label for="remember-me">Remember me</label>
+                            </p>
+
+                            <p class="fieldset">
+                                <input class="full-width" type="submit" value="Login">
+                            </p>
+                        </form>
+
+                        <p class="cd-form-bottom-message"><a href="javascript:void(0);">Forgot your password?</a></p>
+                        <!-- <a href="javascript:void(0);" class="cd-close-form">Close</a> -->
                     </div>
+                    <!-- cd-login -->
+
+                    <div id="cd-signup">
+                        <!-- sign up form -->
+                        <form class="cd-form">
+                            <p class="social-login">
+                                <span class="social-login-facebook"><a href="#"><i class="fa fa-facebook"></i> Facebook</a></span>
+                                <span class="social-login-google"><a href="#"><i class="fa fa-google"></i> Google</a></span>
+                                <span class="social-login-twitter"><a href="#"><i class="fa fa-twitter"></i> Twitter</a></span>
+                            </p>
+
+                            <div class="lined-text">
+                                <span>Or register your new account on Unify</span>
+                                <hr>
+                            </div>
+
+                            <p class="fieldset">
+                                <label class="image-replace cd-username" for="signup-username">Username</label>
+                                <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
+                                <span class="cd-error-message">Error message here!</span>
+                            </p>
+
+                            <p class="fieldset">
+                                <label class="image-replace cd-email" for="signup-email">E-mail</label>
+                                <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
+                                <span class="cd-error-message">Error message here!</span>
+                            </p>
+
+                            <p class="fieldset">
+                                <label class="image-replace cd-password" for="signup-password">Password</label>
+                                <input class="full-width has-padding has-border" id="signup-password" type="text" placeholder="Password">
+                                <a href="javascript:void(0);" class="hide-password">Hide</a>
+                                <span class="cd-error-message">Error message here!</span>
+                            </p>
+
+                            <p class="fieldset">
+                                <input type="checkbox" id="accept-terms">
+                                <label for="accept-terms">I agree to the <a href="javascript:void(0);">Terms</a></label>
+                            </p>
+
+                            <p class="fieldset">
+                                <input class="full-width has-padding" type="submit" value="Create account">
+                            </p>
+                        </form>
+
+                        <!-- <a href="javascript:void(0);" class="cd-close-form">Close</a> -->
+                    </div>
+                    <!-- cd-signup -->
+
+                    <div id="cd-reset-password">
+                        <!-- reset password form -->
+                        <p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+
+                        <form class="cd-form">
+                            <p class="fieldset">
+                                <label class="image-replace cd-email" for="reset-email">E-mail</label>
+                                <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
+                                <span class="cd-error-message">Error message here!</span>
+                            </p>
+
+                            <p class="fieldset">
+                                <input class="full-width has-padding" type="submit" value="Reset password">
+                            </p>
+                        </form>
+
+                        <p class="cd-form-bottom-message"><a href="javascript:void(0);">Back to log-in</a></p>
+                    </div>
+                    <!-- cd-reset-password -->
+                    <a href="javascript:void(0);" class="cd-close-form">Close</a>
                 </div>
-            </div><!--/copyright-->
+                <!-- cd-user-modal-container -->
+            </div>*@
+        <!-- cd-user-modal -->
+        <!-- End Login/Reg Modal Box -->
+    </div>
+    <!--/wrapper-->
+    <!--=== Style Switcher ===-->
+    <i class="style-switcher-btn fa fa-cogs hidden-xs"></i>
+    <div class="style-switcher animated fadeInRight">
+        <div class="style-swticher-header">
+            <div class="style-switcher-heading">Style Switcher</div>
+            <div class="theme-close"><i class="icon-close"></i></div>
         </div>
-        <!--=== End Footer Version 1 ===-->
-    </div><!--/End Wrapepr-->
+
+        <div class="style-swticher-body">
+            <!-- Theme Colors -->
+            <div class="style-switcher-heading">Theme Colors</div>
+            <ul class="list-unstyled">
+                <li class="theme-default theme-active" data-style="default" data-header="light"></li>
+                <li class="theme-blue" data-style="blue" data-header="light"></li>
+                <li class="theme-orange" data-style="orange" data-header="light"></li>
+                <li class="theme-red" data-style="red" data-header="light"></li>
+                <li class="theme-light" data-style="light" data-header="light"></li>
+                <li class="theme-purple last" data-style="purple" data-header="light"></li>
+                <li class="theme-aqua" data-style="aqua" data-header="light"></li>
+                <li class="theme-brown" data-style="brown" data-header="light"></li>
+                <li class="theme-dark-blue" data-style="dark-blue" data-header="light"></li>
+                <li class="theme-light-green" data-style="light-green" data-header="light"></li>
+                <li class="theme-dark-red" data-style="dark-red" data-header="light"></li>
+                <li class="theme-teal last" data-style="teal" data-header="light"></li>
+            </ul>
+
+            <!-- Theme Skins -->
+            <div class="style-switcher-heading">Theme Skins</div>
+            <div class="row no-col-space margin-bottom-20 skins-section">
+                <div class="col-xs-6">
+                    <button data-skins="default" class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn handle-skins-btn">Light</button>
+                </div>
+                <div class="col-xs-6">
+                    <button data-skins="dark" class="btn-u btn-u-xs btn-u-dark btn-block skins-btn">Dark</button>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Layout Styles -->
+            <div class="style-switcher-heading">Layout Styles</div>
+            <div class="row no-col-space margin-bottom-20">
+                <div class="col-xs-6">
+                    <a href="javascript:void(0);" class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn wide-layout-btn">Wide</a>
+                </div>
+                <div class="col-xs-6">
+                    <a href="javascript:void(0);" class="btn-u btn-u-xs btn-u-dark btn-block boxed-layout-btn">Boxed</a>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Theme Type -->
+            <div class="style-switcher-heading">Theme Types and Versions</div>
+            <div class="row no-col-space margin-bottom-10">
+                <div class="col-xs-6">
+                    <a href="E-Commerce/index.html" class="btn-u btn-u-xs btn-u-dark btn-block">Shop UI <small class="dp-block">Template</small></a>
+                </div>
+                <div class="col-xs-6">
+                    <a href="One-Pages/Classic/index.html" class="btn-u btn-u-xs btn-u-dark btn-block">One Page <small class="dp-block">Template</small></a>
+                </div>
+            </div>
+
+            <div class="row no-col-space">
+                <div class="col-xs-6">
+                    <a href="Blog-Magazine/index.html" class="btn-u btn-u-xs btn-u-dark btn-block">Blog <small class="dp-block">Template</small></a>
+                </div>
+                <div class="col-xs-6">
+                    <a href="RTL/index.html" class="btn-u btn-u-xs btn-u-dark btn-block">RTL <small class="dp-block">Version</small></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/style-switcher-->
     <!--=== End Style Switcher ===-->
     <!-- JS Global Compulsory -->
-    <script type="text/javascript" src="/lib/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="/lib/jquery-migrate/jquery-migrate.js"></script>
-    <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <environment names="Development">
+        <script src="//static.dotnet.live/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="//static.dotnet.live/lib/jquery-migrate/jquery-migrate.js" asp-append-version="true"></script>
+        <script src="//static.dotnet.live/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js" asp-fallback-src="//static.dotnet.live/lib/jquery/dist/jquery.min.js" asp-fallback-test="window.jQuery"
+                crossorigin="anonymous" integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="//static.dotnet.live/lib/jquery-migrate/jquery-migrate.js" asp-append-version="true"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" asp-fallback-src="//static.dotnet.live/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery" crossorigin="anonymous" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+    </environment>
+    <!--<script type="text/javascript" src="/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/lib/jquery-migrate/jquery-migrate.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>-->
     <!-- JS Implementing Plugins -->
-    <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
-    <script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
-    <!-- JS Customization -->
-    <script type="text/javascript" src="assets/js/custom.js"></script>
+    <script type="text/javascript" src="//static.dotnet.live/assets/plugins/back-to-top.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="//static.dotnet.live/assets/plugins/smoothScroll.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="//static.dotnet.live/assets/plugins/modernizr.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="//static.dotnet.live/assets/plugins/login-signup-modal-window/js/main.js" asp-append-version="true"></script>
+    <!-- Gem jQuery -->
+    <script type="text/javascript" src="//static.dotnet.live/assets/plugins/jquery.parallax.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="//static.dotnet.live/assets/plugins/fancybox/source/jquery.fancybox.pack.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="//static.dotnet.live/lib/owl-carousel-v1/owl-carousel/owl.carousel.min.js" asp-append-version="true"></script>
+    <!-- JS Customization --
+    <script type="text/javascript" src="asets/js/custom.js" asp-append-version="true"></script>
     <!-- JS Page Level -->
-    <script type="text/javascript" src="assets/js/app.js"></script>
-    <script type="text/javascript" src="assets/js/plugins/style-switcher.js"></script>
-    <script type="text/javascript">
-		jQuery(document).ready(function() {
-			App.init();
-			StyleSwitcher.initStyleSwitcher();
-		});
-    </script>
-    <!--[if lt IE 9]>
-    <script src="assets/plugins/respond.js"></script>
-    <script src="assets/plugins/html5shiv.js"></script>
-    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
-    <![endif]-->
     @RenderSection("Scripts", required: false)
+
+    <!--[if lt IE 9]>
+    <script src="//static.dotnet.live/assets/plugins/respond.js" asp-append-version="true"></script>
+    <script src="//static.dotnet.live/assets/plugins/html5shiv.js" asp-append-version="true"></script>
+    <script src="//static.dotnet.live/assets/plugins/placeholder-IE-fixes.js" asp-append-version="true"></script>
+    <![endif]-->
 </body>
+
 </html>
-
-        
-
-  
