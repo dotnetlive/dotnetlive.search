@@ -13,6 +13,6 @@ namespace DotNetLive.Search.Services.Interface.CnBlogs
         /// <param name="pageSize">每页条数默认20</param>
         /// <param name="keyWord">关键字</param>
         /// <returns>返回查询实体及其他必须参数</returns>
-        Entities.Page.ElasticPager<Entities.CnBlogs.Blog> QueryByPage(int pageIndex = 1, int pageSize = 20, string keyWord = null);
+        Entities.Page.ElasticPager<Entities.CnBlogs.Blog> QueryByPage(int? pageIndex = 1, int pageSize = 20, string keyWord = null);
     }
 }

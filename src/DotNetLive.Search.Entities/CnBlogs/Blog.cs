@@ -33,6 +33,7 @@ namespace DotNetLive.Search.Entities.CnBlogs
         }
         public string author { get; set; }
         public string title { get; set; }
+        public string h_title { get; set; }
         public int view_num { get; set;}
         public int comment_num { get; set; }
         public int goods_num { get; set; }

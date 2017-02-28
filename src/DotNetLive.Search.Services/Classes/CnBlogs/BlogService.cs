@@ -25,13 +25,14 @@ namespace DotNetLive.Search.Services.Classes.CnBlogs
             search = factory.CreateSearchClient(searchIndex, logger);
         }
 
-        public ElasticPager<Blog> QueryByPage(int pageIndex = 1, int pageSize = 20, string keyWord = null)
+        public ElasticPager<Blog> QueryByPage(int? pageIndex = 1, int pageSize = 20, string keyWord = null)
         {
             var keys = new string[] { "title", "summary" };
+            int page = pageIndex.HasValue ? pageIndex.Value : 1;
             //查询参数构造
             IPageParam pageParams = new PageParamWithSearch
             {
-                PageIndex = pageIndex,
+                PageIndex = page,
                 PageSize = pageSize,
                 KeyWord = keyWord,
                 Operator = Nest.Operator.Or,
@@ -40,7 +41,8 @@ namespace DotNetLive.Search.Services.Classes.CnBlogs
                 {
                     Keys = keys,
                     PostTags = "</strong>",
-                    PreTags = "<strong>"
+                    PreTags = "<strong>",
+                    PrefixOfKey = "h_"//替换字段前缀
                 }
             };
 
@@ -54,7 +56,7 @@ namespace DotNetLive.Search.Services.Classes.CnBlogs
                 List = result.List,
                 PageData = new Entities.Page.PageParam
                 {
-                    PageIndex = pageIndex,
+                    PageIndex = page,
                     PageSize = pageSize,
                     TotalCount = result.Total
                 }
