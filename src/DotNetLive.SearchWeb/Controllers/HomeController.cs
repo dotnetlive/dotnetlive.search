@@ -25,7 +25,19 @@ namespace DotNetLive.SerachWeb.Controllers
         /// <param name="pageIndex"></param>
         /// <param name="keyword"></param>
         /// <returns></returns>
-        public IActionResult Index(int pageIndex = 1, string keyword = null)
+        public IActionResult Index(int? pageIndex = 1, string keyword = null)
+        {
+            var model = cnblogService.QueryByPage(pageIndex, keyWord: keyword);
+            return View(model);
+        }
+
+        /// <summary>
+        /// 改版后的搜索首页
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        public IActionResult Search(int? pageIndex = 1, string keyword = null)
         {
             var model = cnblogService.QueryByPage(pageIndex, keyWord: keyword);
             return View(model);
