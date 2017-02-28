@@ -1,0 +1,94 @@
+﻿@using DotNetLive.Search.Entities.Page;
+@using DotNetLive.Search.Entities.CnBlogs;
+@model ElasticPager<Blog>
+<style>
+    .inner-results strong {
+        color: #dd4b39;
+        font-style: normal;
+        font-weight: normal
+    }
+</style>
+<!--=== Search Block Version 2 ===-->
+<div class="search-block-v2">
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+            @*<h2>搜一搜</h2>*@
+            <div class="input-group">
+                <input id="txtKeyWord" type="text" value="@Model.KeyWord" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn-u" type="button" onclick="search()"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div><!--/container-->
+<!--=== End Search Block Version 2 ===-->
+<!--=== Search Results ===-->
+<div class="container s-results margin-bottom-50">
+    <span class="results-number">搜到 @Model.PageData.TotalCount 条记录,用时 @Model.Took 毫秒</span>
+    <!-- Begin Inner Results -->
+@foreach (var item in Model?.List)
+{
+    <div class="inner-results">
+        <h3><a href="@item.href" target="_blank">@Html.Raw(item.h_title)</a></h3>
+        <ul class="list-inline up-ul">
+            <li>@item.href</li>
+            @*<li class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                    More<i class="fa fa-caret-down margin-left-5"></i>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul role="menu" class="dropdown-menu">
+                    <li><a href="#">Share</a></li>
+                    <li><a href="#">Similar</a></li>
+                    <li><a href="#">Advanced search</a></li>
+                </ul>
+            </li>*@
+            <li><a href="#"></a></li>
+        </ul>
+        <p>@Html.Raw(item.summary)</p>
+        <ul class="list-inline down-ul">
+            <li>
+               评论 @item.comment_num 推荐 @item.goods_num 浏览 @item.view_num
+            </li>
+            <li>@item.create_time -  <a href="@item.author_url" target="_blank">@item.author</a></li>
+            <li><a href="@item.href">@item.title</a></li>
+        </ul>
+    </div>
+    <hr>
+}
+    <!-- Begin Inner Results -->
+
+    
+    <div class="margin-bottom-30"></div>
+
+    @{
+        var prePage = 0L;
+        var nextPage = 0L;
+        var totalPage = 0L;
+        prePage = Model.PageData.PageIndex == 1 ? 1 : Model.PageData.PageIndex - 1;
+        nextPage = Model.PageData.PageIndex == Model.PageData.TotalPage ? Model.PageData.TotalPage : Model.PageData.PageIndex + 1;
+        totalPage = Model.PageData.TotalPage > 200 ? 200 : Model.PageData.TotalPage;
+    }
+
+    <div class="text-left">
+        <ul class="pagination">
+            <li><a href="/?pageIndex=1&keyword=@Model.KeyWord">首页</a></li>
+            <li><a href="/?pageIndex=@prePage&keyword=@Model.KeyWord">上一页</a></li>
+            <li class="active"><a href="#">@Model.PageData.PageIndex</a></li>
+            <li><a href="/?pageIndex=@nextPage&keyword=@Model.KeyWord">下一页</a></li>
+            <li><a href="/?pageIndex=@totalPage&keyword=@Model.KeyWord">尾页</a></li>
+        </ul>
+    </div>
+</div><!--/container-->
+<!--=== End Search Results ===-->
+
+@section Scripts{
+<script>
+        function search() {
+            var key = $('#txtKeyWord').val();
+            location.href = '/?pageIndex=1&keyword=' + key
+    }
+    </script>
+
+}
