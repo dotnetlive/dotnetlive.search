@@ -187,7 +187,12 @@ namespace DotNetLive.Search.Engine.Client
                             if (x.Highlights.ContainsKey(key))
                             {
                                 string value = string.Join("", x.Highlights[key]?.Highlights);
-                                PropertyInfo info = properties.FirstOrDefault(p => p.Name == key);
+                                PropertyInfo info = properties.FirstOrDefault(p => p.Name == pageParams.Highlight.PrefixOfKey + key);
+                                //没找到带前缀的属性，则替换之前的
+                                if (info == null && pageParams.Highlight.ReplaceAuto)
+                                {
+                                    info = properties.FirstOrDefault(p => p.Name == key);
+                                }
                                 if (info?.CanWrite == true)
                                 {
                                     if (!string.IsNullOrEmpty(value))
@@ -242,7 +247,67 @@ namespace DotNetLive.Search.Engine.Client
         }
         #endregion
 
-        #region 高级操作
+        #region 其他查询
+        #region 单一条件查询，一般是精确查询
+        /// <summary>
+        /// 单一条件查询，一般是精确查询
+        /// exp: id=123456,name="zhangsan",
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="field">字段名</param>
+        /// <param name="value">查询值</param>
+        /// <param name="index">索引</param>
+        /// <returns></returns>
+        public IEnumerable<T> Query<T>(string field, object value, string index = null) where T : class
+        {
+            if (string.IsNullOrEmpty(field))
+            {
+                return null;
+            }
+            ISearchRequest searchRequest = new SearchDescriptor<T>().Index(index ?? _defaultIndex).PostFilter(f => f.Term(x => x.Field(field).Value(value)));
+
+            var response = _builder?.Client.Search<T>(searchRequest);
+            return response.Documents;
+        }
+        #endregion
+
+        #region  根据ID数组查询
+        /// <summary>
+        /// 根据ID数组查询
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="index">文档索引</param>
+        /// <param name="ids">文档值</param>
+        /// <returns></returns>
+        public IEnumerable<T> Query<T>(string index = null, params long[] ids) where T : class
+        {
+            ISearchRequest searchRequest = CreateDescriptor<T>(index).Query(q => q.Ids(x => x.Values(ids)));
+            return Query<T>(searchRequest);
+        }
+        public IEnumerable<T> Query<T>(string index = null, params string[] ids) where T : class
+        {
+            ISearchRequest searchRequest = CreateDescriptor<T>(index).Query(q => q.Ids(x => x.Values(ids)));
+            return Query<T>(searchRequest);
+        }
+        public IEnumerable<T> Query<T>(string index = null, params Guid[] ids) where T : class
+        {
+            ISearchRequest searchRequest = CreateDescriptor<T>(index).Query(q => q.Ids(x => x.Values(ids)));
+            return Query<T>(searchRequest);
+        }
+
+        #endregion
+
+        #region private
+        private IEnumerable<T> Query<T>(ISearchRequest request) where T : class
+        {
+            var response = _builder?.Client.Search<T>(request);
+            return response.Documents;
+        }
+        private SearchDescriptor<T> CreateDescriptor<T>(string index) where T : class
+        {
+            return new SearchDescriptor<T>().Index(index ?? _defaultIndex);
+        }
+        #endregion
         #endregion
 
         #region 批量操作
