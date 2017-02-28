@@ -30,7 +30,10 @@
 @foreach (var item in Model?.List)
 {
     <div class="inner-results">
-        <h3><a href="@item.href" target="_blank">@Html.Raw(item.h_title)</a></h3>
+        @{
+            var title = item.h_title == null ? item.title : item.h_title;
+         }
+        <h3><a href="@item.href" target="_blank">@Html.Raw(title)</a></h3>
         <ul class="list-inline up-ul">
             <li>@item.href</li>
             @*<li class="btn-group">
