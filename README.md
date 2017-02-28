@@ -1,2 +1,2 @@
 # DotNetLive.Search
-###  ËÑË÷ÏîÄ¿£ºASP.NET Core +  ElasticSearch 
+### ASP.NET Core +  ElasticSearch 
