@@ -250,3 +250,6 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+**/wwwroot/node_modules
+**/wwwroot/bin
+**/*.min.*

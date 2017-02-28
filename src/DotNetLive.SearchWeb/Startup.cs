@@ -1,4 +1,5 @@
-﻿using DotNetLive.Search.Config;
+﻿using DotNetLive.Framework.DependencyManagement;
+using DotNetLive.Search.Config;
 using DotNetLive.Search.Services.Classes.CnBlogs;
 using DotNetLive.Search.Services.Factory;
 using DotNetLive.Search.Services.Interface.CnBlogs;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
 
 namespace DotNetLive.SerachWeb
 {
@@ -26,19 +28,25 @@ namespace DotNetLive.SerachWeb
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            //Add Options
-           
-            // Add framework services.
-            services.AddMvc();
+            var env = services.BuildServiceProvider().GetService<IHostingEnvironment>();
+            services.AddSingleton<IServiceCollection>(factory => services);
+            //services.AddSingleton<IContainer>(factory => ApplicationContainer);
+            services.AddSingleton<IConfigurationRoot>(factory => Configuration);
+
+            services.AddOptions();
+
             //Add config options
             services.Configure<ElasticSetting>(Configuration.GetSection("ElasticSetting"))
             //Add search factory
             .AddSingleton<ISearchFactory, SearchFactory>()
             //Add search Service
             .AddTransient<ICnBlogsService, BlogService>();
-            
+
+            //先通过asp.net core ioc注册
+            services.AddDependencyRegister(Configuration);
+            return services.BuildServiceProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +66,8 @@ namespace DotNetLive.SerachWeb
             }
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseMvc(routes =>
             {
