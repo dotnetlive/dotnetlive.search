@@ -14,7 +14,7 @@ namespace DotNetLive.SearchWeb.DependencyRegister
 {
     public class SearchDependencyRegister : IDependencyRegister
     {
-        public ExecuteOrderType ExecuteOrder => ExecuteOrderType.Normal;
+        //public ExecuteOrderType ExecuteOrder => ExecuteOrderType.Normal;
 
         public void Register(IServiceCollection services, IConfigurationRoot configuration)
         {
