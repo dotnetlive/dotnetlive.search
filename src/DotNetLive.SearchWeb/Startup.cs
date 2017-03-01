@@ -34,16 +34,6 @@ namespace DotNetLive.SerachWeb
             services.AddSingleton<IServiceCollection>(factory => services);
             //services.AddSingleton<IContainer>(factory => ApplicationContainer);
             services.AddSingleton<IConfigurationRoot>(factory => Configuration);
-
-            services.AddOptions();
-
-            //Add config options
-            services.Configure<ElasticSetting>(Configuration.GetSection("ElasticSetting"))
-            //Add search factory
-            .AddSingleton<ISearchFactory, SearchFactory>()
-            //Add search Service
-            .AddTransient<ICnBlogsService, BlogService>();
-
             //先通过asp.net core ioc注册
             services.AddDependencyRegister(Configuration);
             return services.BuildServiceProvider();
