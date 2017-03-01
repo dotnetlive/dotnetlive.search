@@ -16,8 +16,6 @@ namespace DotNetLive.SearchWeb.DependencyRegister
     {
         public void Register(IServiceCollection services, IConfigurationRoot configuration)
         {
-            services.AddOptions();
-
             //Add config options
             services.Configure<ElasticSetting>(configuration.GetSection("ElasticSetting"))
             //Add search factory
