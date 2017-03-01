@@ -14,7 +14,7 @@ namespace DotNetLive.SearchWeb.DependencyRegister
 {
     public class SearchDependencyRegister : IDependencyRegister
     {
-        public void Register(IServiceCollection services, IConfigurationRoot configuration, IServiceProvider serviceProvider)
+        public void Register(IServiceCollection services, IConfigurationRoot configuration)
         {
             services.AddOptions();
 
