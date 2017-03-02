@@ -60,6 +60,14 @@ namespace DotNetLive.Search.UnitTest
             Assert.IsTrue(result);
         }
 
+        [TestMethod]
+        public async void DeleteIndexAsync()
+        {
+            Engine.Client.DotNetSearch search = new Engine.Client.DotNetSearch();
+            bool result = await search.DeleteIndexAsync("log");
+            Assert.IsTrue(result);
+        }
+
 
     }
 }
