@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cnblogs.import", "Tools\cnb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetLive.Search.Services", "DotNetLive.Search.Services\DotNetLive.Search.Services.csproj", "{28970752-14AC-4E92-A627-5426F5219607}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetLive.Framework", "..\..\dotnetlive.framework\src\DotNetLive.Framework\DotNetLive.Framework.csproj", "{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,18 +99,6 @@ Global
 		{28970752-14AC-4E92-A627-5426F5219607}.Release|x64.Build.0 = Release|x64
 		{28970752-14AC-4E92-A627-5426F5219607}.Release|x86.ActiveCfg = Release|x86
 		{28970752-14AC-4E92-A627-5426F5219607}.Release|x86.Build.0 = Release|x86
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Debug|x64.ActiveCfg = Debug|x64
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Debug|x64.Build.0 = Debug|x64
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Debug|x86.ActiveCfg = Debug|x86
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Debug|x86.Build.0 = Debug|x86
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Release|x64.ActiveCfg = Release|x64
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Release|x64.Build.0 = Release|x64
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Release|x86.ActiveCfg = Release|x86
-		{8F720CBD-5D1D-4AAC-875D-8B1CEC01C146}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

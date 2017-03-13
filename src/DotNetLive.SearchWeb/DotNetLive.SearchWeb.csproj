@@ -9,6 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetLive.Framework" Version="1.0.0" />
+    <PackageReference Include="DotNetLive.Framework.Mvc" Version="1.0.0" />
+    <PackageReference Include="DotNetLive.Framework.Web" Version="1.0.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.1" />
@@ -17,7 +20,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\dotnetlive.framework\src\DotNetLive.Framework\DotNetLive.Framework.csproj" />
     <ProjectReference Include="..\DotNetLive.Search.Entities\DotNetLive.Search.Entities.csproj" />
     <ProjectReference Include="..\DotNetLive.Search.Services\DotNetLive.Search.Services.csproj" />
   </ItemGroup>
