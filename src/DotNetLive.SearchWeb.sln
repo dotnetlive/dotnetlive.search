@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
@@ -16,20 +15,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cnblogs.import", "Tools\cnblogs.import\cnblogs.import.csproj", "{E8D5F685-89D2-43C4-B340-D4065614516C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetLive.Search.Services", "DotNetLive.Search.Services\DotNetLive.Search.Services.csproj", "{28970752-14AC-4E92-A627-5426F5219607}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetLive.Framework", "..\..\dotnetlive.framework\src\DotNetLive.Framework\DotNetLive.Framework.csproj", "{AEA54C85-A854-4810-A7B7-04329C4BC40C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetLive.Framework.Mvc", "..\..\dotnetlive.framework\src\DotNetLive.Framework.Mvc\DotNetLive.Framework.Mvc.csproj", "{B0B03E01-B427-4D33-8A21-640F107A57F0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetLive.Framework.Web", "..\..\dotnetlive.framework\src\DotNetLive.Framework.Web\DotNetLive.Framework.Web.csproj", "{EF9724CB-581F-4D17-84D9-5E0D9C03EC92}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetLive.Framework.WebApiClient", "..\..\dotnetlive.framework\src\DotNetLive.Framework.WebApiClient\DotNetLive.Framework.WebApiClient.csproj", "{3650129E-8CA8-4FD2-BA98-173DE1DA81E2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetLive.Framework.WebApi", "..\..\dotnetlive.framework\src\DotNetLive.Framework.WebApi\DotNetLive.Framework.WebApi.csproj", "{E568523A-DD5A-4F0D-B86C-69110F93E14B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetLive.Framework.Data", "..\..\dotnetlive.framework\src\DotNetLive.Framework.Data\DotNetLive.Framework.Data.csproj", "{55F7EB3B-AAB5-47F5-AC7D-B922BDBDE7A3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetLive.Framework.Diagnostics.Trace", "..\..\dotnetlive.framework\src\DotNetLive.Framework.Diagnostics.Trace\DotNetLive.Framework.Diagnostics.Trace.csproj", "{48E04DCD-3292-405D-81C6-BA6C7E3558F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
