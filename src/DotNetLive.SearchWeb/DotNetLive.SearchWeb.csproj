@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.0</TargetFramework>
@@ -20,6 +20,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
+
     <ProjectReference Include="..\DotNetLive.Search.Entities\DotNetLive.Search.Entities.csproj" />
     <ProjectReference Include="..\DotNetLive.Search.Services\DotNetLive.Search.Services.csproj" />
   </ItemGroup>
